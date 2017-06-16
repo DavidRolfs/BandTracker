@@ -43,7 +43,7 @@ namespace BandTracker
       Assert.Equal(testList, result);
     }
     [Fact]
-    public void Test_Save_AssignsIdToCategoryObject()
+    public void Test_Save_AssignsIdToBand()
     {
       Band testBand = new Band("Animal Collective");
       testBand.Save();
@@ -65,9 +65,46 @@ namespace BandTracker
 
       Assert.Equal(testBand, foundBand);
     }
+    [Fact]
+    public void AddVenues_AddVenuesToBands_AddsVenueToBand()
+
+    {
+      Band testBand = new Band("Animal Collective");
+      testBand.Save();
+
+      Venue testVenue = new Venue("Crystal Ballroom", "Portland");
+      testVenue.Save();
+
+      testBand.AddVenue(testVenue);
+
+      List<Venue> savedVenues = testBand.GetVenues();
+      List<Venue> testList = new List<Venue>{testVenue};
+
+      Assert.Equal(testList, savedVenues);
+    }
+
+    [Fact]
+    public void GetVenues_ReturnAllBandVenues_VenueList()
+    {
+      Band testBand = new Band("Animal Collective");
+      testBand.Save();
+
+      Venue testVenue1 = new Venue("Crystal Ballroom", "Portland");
+      testVenue1.Save();
+
+      Venue testVenue2 = new Venue("Wonder Ballroom", "PLand");
+      testVenue2.Save();
+
+      testBand.AddVenue(testVenue1);
+      List<Venue> savedVenue = testBand.GetVenues();
+      List<Venue> testList = new List<Venue> {testVenue1};
+
+      Assert.Equal(testList, savedVenue);
+    }
     public void Dispose()
     {
       Band.DeleteAll();
+      Venue.DeleteAll();
     }
   }
 }

@@ -25,7 +25,7 @@ namespace BandTracker
     }
 
     [Fact]
-    public void Equals_TrueForSameDescription_Venue()
+    public void Equals_TrueForSameObjects_Venue()
     {
       //Arrange, Act
       Venue firstVenue = new Venue("Crystal Ballroom", "Portland");
@@ -81,7 +81,7 @@ namespace BandTracker
       Assert.Equal(testVenue, result);
     }
     [Fact]
-    public void AddBand_AddsAirpotToVenue_BandList()
+    public void AddBand_AddsBandsToVenue_BandList()
     {
       Venue testVenue = new Venue("Crystal Ballroom", "Portland");
       testVenue.Save();
@@ -98,7 +98,7 @@ namespace BandTracker
     }
 
     [Fact]
-    public void GetBands_ReturnsAllFLightBands_BandList()
+    public void GetBands_ReturnsAllBands_BandList()
     {
       Venue testVenue = new Venue("Crystal Ballroom", "Portland");
       testVenue.Save();
@@ -150,6 +150,7 @@ namespace BandTracker
     public void Dispose()
     {
       Venue.DeleteAll();
+      Band.DeleteAll();
     }
   }
 }
