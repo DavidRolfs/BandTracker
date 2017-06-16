@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="/Content/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/Content/css/styles.css">
+    <script src="/Content/js/jquery-3.2.1.js" type="text/javascript"></script>
+    <script src="/Content/js/scripts.js" type="text/javascript"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Six Stars Recipe Box</title>
+  </head>
+  <body>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Six Stars Recipe Box</h1><h1><small>We've got recipes and six stars so that makes us better than all those other five star recipe boxes.</small></h1>
+      </div>
+    </div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <ul class="nav nav-pills">
+            <li class="nav-item">
+              <a class="nav-link active" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/bands">View bands</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/bands/add">Add Band</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/venues">View Venues</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/venues/add">Add Venues</a>
+            </li>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      @RenderBody()
+    </div>
+  </body>
+    <footer class="page-footer">
+        <div class="container">
+          <hr>
+          <center><a href = "/"><img src="/Content/img/home.png" height="70"></a></strong></center>
+        </div>
+    </footer>
+</html>
