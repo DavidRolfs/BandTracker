@@ -78,7 +78,9 @@ namespace BandTracker
       SqlParameter nameParameter = new SqlParameter();
       nameParameter.ParameterName = "@BandName";
       nameParameter.Value = this.GetName();
+
       cmd.Parameters.Add(nameParameter);
+      
       SqlDataReader rdr = cmd.ExecuteReader();
 
       while(rdr.Read())
