@@ -10,7 +10,7 @@
   <ul>
     @foreach (var venue in Model)
     {
-      <li><a href="/venues/@venue.GetId()">@venue.GetName(), venue.GetCity()</a></li>
+      <li><a href="/venues/@venue.GetId()">@venue.GetName(), @venue.GetCity()</a></li>
     }
   </ul>
 }
