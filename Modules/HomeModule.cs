@@ -77,6 +77,17 @@ namespace BandTracker
         SelectedVenue.Delete();
         return View["success.cshtml"];
       };
+      Get["venues/edit/{id}"] = parameter => {
+       Venue SelectedVenue = Venue.Find(parameter.id);
+       return View["venue_edit.cshtml", SelectedVenue];
+     };
+
+     Patch["venues/edit/{id}"] = parameter => {
+       Venue SelectedVenue = Venue.Find(parameter.id);
+       SelectedVenue.UpdateVenueName(Request.Form["edit-venueName"]);
+       List<Venue> allVenues = Venue.GetAll();
+       return View["venues.cshtml", allVenues];
+     };
     }
   }
 }
