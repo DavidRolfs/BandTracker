@@ -43,10 +43,6 @@ namespace BandTracker
     {
       return _city;
     }
-    public void SetDescription(string newCity)
-    {
-      _city = newCity;
-    }
     public static List<Venue> GetAll()
     {
       List<Venue> AllVenues = new List<Venue>{};
@@ -153,23 +149,114 @@ namespace BandTracker
       }
       return foundVenue;
     }
-    // public void Delete()
-    // {
-    //   SqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //
-    //   SqlCommand cmd = new SqlCommand("DELETE FROM venues WHERE id = @VenueId; DELETE FROM airport_venues WHERE venue_id = @VenueId;", conn);
-    //   SqlParameter venueIdParameter = new SqlParameter();
-    //   venueIdParameter.ParameterName = "@VenueId";
-    //   venueIdParameter.Value = this.GetId();
-    //
-    //   cmd.Parameters.Add(venueIdParameter);
-    //   cmd.ExecuteNonQuery();
-    //
-    //   if (conn != null)
-    //   {
-    //     conn.Close();
-    //   }
-    // }
+
+    public void AddBand(Band newBand)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO bands_venues (band_id, venue_id) VALUES (@BandId, @VenueId);", conn);
+
+      SqlParameter bandIdParameter = new SqlParameter();
+      bandIdParameter.ParameterName = "@BandId";
+      bandIdParameter.Value = newBand.GetId();
+      cmd.Parameters.Add(bandIdParameter);
+
+      SqlParameter venueIdParameter = new SqlParameter();
+      venueIdParameter.ParameterName = "@VenueId";
+      venueIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(venueIdParameter);
+
+      cmd.ExecuteNonQuery();
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+    public List<Band> GetBands()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT bands.* FROM venues JOIN bands_venues ON (venues.id = bands_venues.venue_id) JOIN bands ON (bands_venues.band_id = bands.id) WHERE venues.id = @VenueId;", conn);
+      SqlParameter venueIdParameter = new SqlParameter();
+      venueIdParameter.ParameterName = "@VenueId";
+      venueIdParameter.Value = this.GetId();
+
+      cmd.Parameters.Add(venueIdParameter);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      List<Band> bands = new List<Band> {};
+
+      while(rdr.Read())
+        {
+          int thisBandId = rdr.GetInt32(0);
+          string bandName = rdr.GetString(1);
+          Band foundBand = new Band(bandName, thisBandId);
+          bands.Add(foundBand);
+        }
+        if (rdr != null)
+        {
+          rdr.Close();
+        }
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return bands;
+    }
+    public void UpdateVenueName(string newName)
+		{
+			SqlConnection conn = DB.Connection();
+			conn.Open();
+
+			SqlCommand cmd = new SqlCommand("UPDATE venues SET name = @NewName OUTPUT INSERTED.name WHERE id = @venueId;", conn);
+
+			SqlParameter newNameParameter = new SqlParameter();
+			newNameParameter.ParameterName = "@NewName";
+			newNameParameter.Value = newName;
+			cmd.Parameters.Add(newNameParameter);
+
+			SqlParameter venueIdParameter = new SqlParameter();
+			venueIdParameter.ParameterName = "@venueId";
+			venueIdParameter.Value = this.GetId();
+			cmd.Parameters.Add(venueIdParameter);
+
+			SqlDataReader rdr = cmd.ExecuteReader();
+
+			while(rdr.Read())
+			{
+				this._name = rdr.GetString(0);
+			}
+			if(rdr != null)
+			{
+				rdr.Close();
+			}
+			if(conn != null)
+			{
+				conn.Close();
+			}
+		}
+    public void Delete()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM venues WHERE id = @VenueId; DELETE FROM bands_venues WHERE venue_id = @VenueId;", conn);
+      SqlParameter venueIdParameter = new SqlParameter();
+      venueIdParameter.ParameterName = "@VenueId";
+      venueIdParameter.Value = this.GetId();
+
+      cmd.Parameters.Add(venueIdParameter);
+      cmd.ExecuteNonQuery();
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
   }
 }

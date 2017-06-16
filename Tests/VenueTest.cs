@@ -80,6 +80,73 @@ namespace BandTracker
       //Assert
       Assert.Equal(testVenue, result);
     }
+    [Fact]
+    public void AddBand_AddsAirpotToVenue_BandList()
+    {
+      Venue testVenue = new Venue("Crystal Ballroom", "Portland");
+      testVenue.Save();
+
+      Band testBand = new Band("Animal Collective");
+      testBand.Save();
+
+      testVenue.AddBand(testBand);
+
+      List<Band> result = testVenue.GetBands();
+      List<Band> testList = new List<Band>{testBand};
+
+      Assert.Equal(testList, result);
+    }
+
+    [Fact]
+    public void GetBands_ReturnsAllFLightBands_BandList()
+    {
+      Venue testVenue = new Venue("Crystal Ballroom", "Portland");
+      testVenue.Save();
+
+      Band testBand1 = new Band("Animal Collective");
+      testBand1.Save();
+
+      Band testBand2 = new Band("Future Islands");
+      testBand2.Save();
+
+      testVenue.AddBand(testBand1);
+      List<Band> result = testVenue.GetBands();
+      List<Band> testList = new List<Band> {testBand1};
+
+      Assert.Equal(testList, result);
+    }
+    [Fact]
+    public void Delete_DeletesVenueAssociationsFromDataBase_VenueList()
+    {
+      Band testBand = new Band("Animal Collective");
+      testBand.Save();
+
+      Venue testVenue = new Venue("Crystal Ballroom", "Portland");
+      testVenue.Save();
+
+      testVenue.AddBand(testBand);
+      testVenue.Delete();
+
+      List<Venue> result = testBand.GetVenues();
+      List<Venue> test = new List<Venue>{};
+
+      Assert.Equal(test, result);
+    }
+    [Fact]
+    public void Test_Update_UpdatesVenuesNameInDatabase()
+    {
+      Venue testVenue = new Venue("Crystal Ballroom", "Portland");
+      testVenue.Save();
+      string newName = "Paul";
+
+      testVenue.UpdateVenueName(newName);
+
+      string result = testVenue.GetName();
+
+      Assert.Equal(newName, result);
+    }
+
+
     public void Dispose()
     {
       Venue.DeleteAll();
