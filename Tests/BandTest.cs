@@ -26,7 +26,7 @@ namespace BandTracker
     public void Test_Equal_ReturnsTrueForSameName()
     {
       Band firstBand = new Band("Animal Collective");
-      Band secondBand = new Band("Animcal Collective");
+      Band secondBand = new Band("Animal Collective");
 
       Assert.Equal(firstBand, secondBand);
     }
@@ -54,6 +54,16 @@ namespace BandTracker
       int testId = testBand.GetId();
 
       Assert.Equal(testId, result);
+    }
+    [Fact]
+    public void Test_Find_FindsBandInDatabase()
+    {
+      Band testBand = new Band("Animal Collective");
+      testBand.Save();
+
+      Band foundBand = Band.Find(testBand.GetId());
+
+      Assert.Equal(testBand, foundBand);
     }
     public void Dispose()
     {
