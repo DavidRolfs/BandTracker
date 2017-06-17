@@ -9,6 +9,7 @@ namespace BandTracker
     private int _id;
     private string _name;
     private string _city;
+    private string _photo;
 
     public Venue(string name, string city, int Id = 0)
     {
@@ -26,8 +27,9 @@ namespace BandTracker
         else {
           Venue newVenue = (Venue) otherVenue;
           bool idEquality = this.GetId() == newVenue.GetId();
-          bool descriptionEquality = this.GetCity() == newVenue.GetCity();
-          return (idEquality && descriptionEquality);
+          bool nameEquality = this.GetName() == newVenue.GetName();
+          bool cityEquality = this.GetCity() == newVenue.GetCity();
+          return (idEquality && nameEquality && cityEquality);
         }
     }
 
