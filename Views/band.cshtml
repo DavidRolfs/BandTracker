@@ -11,7 +11,10 @@
   <ul>
     @foreach (var venue in @Model["bandVenue"])
     {
-      <li>@venue.GetName(), @venue.GetCity()</li>
+      <li>@venue.GetName(), @venue.GetCity()
+        <br>
+        <img src="@venue.GetPhoto()" alt="photo of @venue.GetName()" width="250">
+      </li>
     }
   </ul>
 }

@@ -11,7 +11,10 @@
   <ul>
     @foreach (var band in @Model["venueBand"])
     {
-      <li>@band.GetName()</li>
+      <li>@band.GetName()
+        <br>
+        <img src="@band.GetBandPhoto()" alt="photo of @band.GetName()" width="250">
+      </li>
     }
   </ul>
 }
