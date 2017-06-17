@@ -2,7 +2,8 @@
   Layout="Shared/_Layout.cshtml";
 }
 
-<h2> @Model["venue"].GetName(), @Model["venue"].GetCity(), <img src="@Model["venue"].GetPhoto()" alt="photo of @Model["venue"].GetName()"></h2>
+<h2> @Model["venue"].GetName(), @Model["venue"].GetCity()</h2>
+<img src="@Model["venue"].GetPhoto()" alt="photo of @Model["venue"].GetName()" width="500">
 <hr />
 @if (@Model["venueBand"].Count != 0)
 {
