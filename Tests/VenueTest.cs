@@ -86,7 +86,7 @@ namespace BandTracker
       Venue testVenue = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");
       testVenue.Save();
 
-      Band testBand = new Band("Animal Collective");
+      Band testBand = new Band("Animal Collective", "website.com/photoOfband.jpg");
       testBand.Save();
 
       testVenue.AddBand(testBand);
@@ -103,10 +103,10 @@ namespace BandTracker
       Venue testVenue = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");
       testVenue.Save();
 
-      Band testBand1 = new Band("Animal Collective");
+      Band testBand1 = new Band("Animal Collective", "website.com/photoOfband.jpg");
       testBand1.Save();
 
-      Band testBand2 = new Band("Future Islands");
+      Band testBand2 = new Band("Future Islands", "website.com/photoOfband.jpg");
       testBand2.Save();
 
       testVenue.AddBand(testBand1);
@@ -118,7 +118,7 @@ namespace BandTracker
     [Fact]
     public void Delete_DeletesVenueAssociationsFromDataBase_VenueList()
     {
-      Band testBand = new Band("Animal Collective");
+      Band testBand = new Band("Animal Collective", "website.com/photoOfband.jpg");
       testBand.Save();
 
       Venue testVenue = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");

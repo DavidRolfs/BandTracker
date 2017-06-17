@@ -25,8 +25,8 @@ namespace BandTracker
     [Fact]
     public void Test_Equal_ReturnsTrueForSameName()
     {
-      Band firstBand = new Band("Animal Collective");
-      Band secondBand = new Band("Animal Collective");
+      Band firstBand = new Band("Animal Collective", "website.com/photoOfband.jpg");
+      Band secondBand = new Band("Animal Collective", "website.com/photoOfband.jpg");
 
       Assert.Equal(firstBand, secondBand);
     }
@@ -34,7 +34,7 @@ namespace BandTracker
     [Fact]
     public void Test_Save_SavesBandToDatabase()
     {
-      Band testBand = new Band("Animal Collective");
+      Band testBand = new Band("Animal Collective", "website.com/photoOfband.jpg");
       testBand.Save();
 
       List<Band> result = Band.GetAll();
@@ -45,7 +45,7 @@ namespace BandTracker
     [Fact]
     public void Test_Save_AssignsIdToBand()
     {
-      Band testBand = new Band("Animal Collective");
+      Band testBand = new Band("Animal Collective", "website.com/photoOfband.jpg");
       testBand.Save();
 
       Band savedBand = Band.GetAll()[0];
@@ -58,7 +58,7 @@ namespace BandTracker
     [Fact]
     public void Test_Find_FindsBandInDatabase()
     {
-      Band testBand = new Band("Animal Collective");
+      Band testBand = new Band("Animal Collective", "website.com/photoOfband.jpg");
       testBand.Save();
 
       Band foundBand = Band.Find(testBand.GetId());
@@ -69,7 +69,7 @@ namespace BandTracker
     public void AddVenues_AddVenuesToBands_AddsVenueToBand()
 
     {
-      Band testBand = new Band("Animal Collective");
+      Band testBand = new Band("Animal Collective", "website.com/photoOfband.jpg");
       testBand.Save();
 
       Venue testVenue = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");
@@ -86,7 +86,7 @@ namespace BandTracker
     [Fact]
     public void GetVenues_ReturnAllBandVenues_VenueList()
     {
-      Band testBand = new Band("Animal Collective");
+      Band testBand = new Band("Animal Collective", "website.com/photoOfband.jpg");
       testBand.Save();
 
       Venue testVenue1 = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");

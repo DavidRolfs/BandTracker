@@ -3,6 +3,7 @@
 }
 
 <h2>Category: @Model["band"].GetName()</h2>
+<img src="@Model["band"].GetBandPhoto()" alt="photo of @Model["band"].GetName()" width="500">
 <hr />
 @if (@Model["bandVenue"].Count != 0)
 {

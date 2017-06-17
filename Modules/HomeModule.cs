@@ -23,7 +23,7 @@ namespace BandTracker
         return View["bands_form.cshtml"];
       };
       Post["/bands/add"]= _ => {
-        Band newBand = new Band(Request.Form["band-name"]);
+        Band newBand = new Band(Request.Form["band-name"], Request.Form["band-name"]);
         newBand.Save();
         return View["success.cshtml"];
       };

@@ -8,11 +8,13 @@ namespace BandTracker
   {
     private int _id;
     private string _name;
+    private string _photo;
 
-    public Band(string name, int id = 0)
+    public Band(string name, string photo, int id = 0)
     {
       _id = id;
       _name = name;
+      _photo = photo;
     }
 
     public override bool Equals(System.Object otherBand)
@@ -26,6 +28,7 @@ namespace BandTracker
         Band newBand = (Band) otherBand;
         bool idEquality = this.GetId() == newBand.GetId();
         bool nameEquality = this.GetName() == newBand.GetName();
+        bool photoEquality = this.GetBandPhoto() == newBand.GetBandPhoto();
         return (idEquality && nameEquality);
       }
     }
@@ -36,6 +39,10 @@ namespace BandTracker
     public string GetName()
     {
       return _name;
+    }
+    public string GetBandPhoto()
+    {
+      return _photo;
     }
     public void SetName(string newName)
     {
@@ -55,7 +62,8 @@ namespace BandTracker
       {
         int bandId = rdr.GetInt32(0);
         string bandName = rdr.GetString(1);
-        Band newBand = new Band(bandName, bandId);
+        string bandPhoto = rdr.GetString(2);
+        Band newBand = new Band(bandName, bandPhoto, bandId);
         allBands.Add(newBand);
       }
       if (rdr != null)
@@ -73,13 +81,18 @@ namespace BandTracker
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO bands (name) OUTPUT INSERTED.id VALUES (@BandName);", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO bands (name, photo) OUTPUT INSERTED.id VALUES (@BandName, @BandPhoto);", conn);
 
       SqlParameter nameParameter = new SqlParameter();
       nameParameter.ParameterName = "@BandName";
       nameParameter.Value = this.GetName();
 
+      SqlParameter photoParameter = new SqlParameter();
+      photoParameter.ParameterName = "@BandPhoto";
+      photoParameter.Value = this.GetBandPhoto();
+
       cmd.Parameters.Add(nameParameter);
+      cmd.Parameters.Add(photoParameter);
 
       SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -109,14 +122,16 @@ namespace BandTracker
       SqlDataReader rdr = cmd.ExecuteReader();
 
       int foundBandId = 0;
-      string foundBandDescription = null;
+      string foundBandName = null;
+      string foundBandPhoto = null;
 
       while(rdr.Read())
       {
         foundBandId = rdr.GetInt32(0);
-        foundBandDescription = rdr.GetString(1);
+        foundBandName = rdr.GetString(1);
+        foundBandPhoto = rdr.GetString(2);
       }
-      Band foundBand = new Band(foundBandDescription, foundBandId);
+      Band foundBand = new Band(foundBandName, foundBandPhoto, foundBandId);
 
       if (rdr != null)
       {

@@ -85,7 +85,7 @@ namespace BandTracker
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO venues (name, city, photo) OUTPUT INSERTED.id VALUES (@VenueName, @VenueCity, @VenuePhoto)", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO venues (name, city, photo) OUTPUT INSERTED.id VALUES (@VenueName, @VenueCity, @VenuePhoto);", conn);
 
       SqlParameter venueNameParam = new SqlParameter();
       venueNameParam.ParameterName = "@VenueName";
@@ -210,7 +210,8 @@ namespace BandTracker
         {
           int thisBandId = rdr.GetInt32(0);
           string bandName = rdr.GetString(1);
-          Band foundBand = new Band(bandName, thisBandId);
+          string bandPhoto = rdr.GetString(2);
+          Band foundBand = new Band(bandName, bandPhoto, thisBandId);
           bands.Add(foundBand);
         }
         if (rdr != null)
