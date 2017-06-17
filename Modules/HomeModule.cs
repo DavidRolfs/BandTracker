@@ -31,7 +31,7 @@ namespace BandTracker
         return View["venues_form.cshtml"];
       };
       Post["/venues/add"]= _ => {
-        Venue newVenue = new Venue(Request.Form["venue-name"], Request.Form["venue-city"]);
+        Venue newVenue = new Venue(Request.Form["venue-name"], Request.Form["venue-city"], Request.Form["venue-photo"]);
         newVenue.Save();
         return View["success.cshtml"];
       };

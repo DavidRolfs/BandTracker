@@ -173,7 +173,8 @@ namespace BandTracker
         int thisVenueId = rdr.GetInt32(0);
         string venueName = rdr.GetString(1);
         string venueCity = rdr.GetString(2);
-        Venue foundVenue = new Venue(venueName, venueCity, thisVenueId);
+        string venuePhoto = rdr.GetString(3);
+        Venue foundVenue = new Venue(venueName, venueCity, venuePhoto, thisVenueId);
         venues.Add(foundVenue);
       }
       if (rdr != null)

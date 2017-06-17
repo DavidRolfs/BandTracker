@@ -72,7 +72,7 @@ namespace BandTracker
       Band testBand = new Band("Animal Collective");
       testBand.Save();
 
-      Venue testVenue = new Venue("Crystal Ballroom", "Portland");
+      Venue testVenue = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");
       testVenue.Save();
 
       testBand.AddVenue(testVenue);
@@ -89,10 +89,10 @@ namespace BandTracker
       Band testBand = new Band("Animal Collective");
       testBand.Save();
 
-      Venue testVenue1 = new Venue("Crystal Ballroom", "Portland");
+      Venue testVenue1 = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");
       testVenue1.Save();
 
-      Venue testVenue2 = new Venue("Wonder Ballroom", "PLand");
+      Venue testVenue2 = new Venue("Wonder Ballroom", "PLand", "website.com/photoOfCrystalBallroom.jpg");
       testVenue2.Save();
 
       testBand.AddVenue(testVenue1);

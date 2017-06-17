@@ -28,8 +28,8 @@ namespace BandTracker
     public void Equals_TrueForSameObjects_Venue()
     {
       //Arrange, Act
-      Venue firstVenue = new Venue("Crystal Ballroom", "Portland");
-      Venue secondVenue = new Venue("Crystal Ballroom", "Portland");
+      Venue firstVenue = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");
+      Venue secondVenue = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");
 
       //Assert
       Assert.Equal(firstVenue, secondVenue);
@@ -39,7 +39,7 @@ namespace BandTracker
     public void Save_VenueSavesToDatabase_VenueList()
     {
       //Arrange
-      Venue testVenue = new Venue("Crystal Ballroom", "Portland");
+      Venue testVenue = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");
       testVenue.Save();
 
       //Act
@@ -54,7 +54,7 @@ namespace BandTracker
     public void Save_AssignsIdToObject_id()
     {
       //Arrange
-      Venue testVenue = new Venue("Crystal Ballroom", "Portland");
+      Venue testVenue = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");
       testVenue.Save();
 
       //Act
@@ -71,7 +71,7 @@ namespace BandTracker
     public void Find_FindsVenueInDatabase_Venue()
     {
       //Arrange
-      Venue testVenue = new Venue("Crystal Ballroom", "Portland");
+      Venue testVenue = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");
       testVenue.Save();
 
       //Act
@@ -83,7 +83,7 @@ namespace BandTracker
     [Fact]
     public void AddBand_AddsBandsToVenue_BandList()
     {
-      Venue testVenue = new Venue("Crystal Ballroom", "Portland");
+      Venue testVenue = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");
       testVenue.Save();
 
       Band testBand = new Band("Animal Collective");
@@ -100,7 +100,7 @@ namespace BandTracker
     [Fact]
     public void GetBands_ReturnsAllBands_BandList()
     {
-      Venue testVenue = new Venue("Crystal Ballroom", "Portland");
+      Venue testVenue = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");
       testVenue.Save();
 
       Band testBand1 = new Band("Animal Collective");
@@ -121,7 +121,7 @@ namespace BandTracker
       Band testBand = new Band("Animal Collective");
       testBand.Save();
 
-      Venue testVenue = new Venue("Crystal Ballroom", "Portland");
+      Venue testVenue = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");
       testVenue.Save();
 
       testVenue.AddBand(testBand);
@@ -135,7 +135,7 @@ namespace BandTracker
     [Fact]
     public void Test_Update_UpdatesVenuesNameInDatabase()
     {
-      Venue testVenue = new Venue("Crystal Ballroom", "Portland");
+      Venue testVenue = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");
       testVenue.Save();
       string newName = "Paul";
 

@@ -11,11 +11,12 @@ namespace BandTracker
     private string _city;
     private string _photo;
 
-    public Venue(string name, string city, int Id = 0)
+    public Venue(string name, string city, string photo, int Id = 0)
     {
       _name = name;
       _id = Id;
       _city = city;
+      _photo = photo;
     }
 
     public override bool Equals(System.Object otherVenue)
@@ -29,7 +30,8 @@ namespace BandTracker
           bool idEquality = this.GetId() == newVenue.GetId();
           bool nameEquality = this.GetName() == newVenue.GetName();
           bool cityEquality = this.GetCity() == newVenue.GetCity();
-          return (idEquality && nameEquality && cityEquality);
+          bool photoEquality = this.GetPhoto() == newVenue.GetPhoto();
+          return (idEquality && nameEquality && cityEquality && photoEquality);
         }
     }
 
@@ -44,6 +46,10 @@ namespace BandTracker
     public string GetCity()
     {
       return _city;
+    }
+    public string GetPhoto()
+    {
+      return _photo;
     }
     public static List<Venue> GetAll()
     {
@@ -60,7 +66,8 @@ namespace BandTracker
         int venueId = rdr.GetInt32(0);
         string venueName = rdr.GetString(1);
         string venueCity = rdr.GetString(2);
-        Venue newVenue = new Venue(venueName, venueCity, venueId);
+        string venuePhoto = rdr.GetString(3);
+        Venue newVenue = new Venue(venueName, venueCity, venuePhoto, venueId);
         AllVenues.Add(newVenue);
       }
       if (rdr != null)
@@ -78,7 +85,7 @@ namespace BandTracker
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("INSERT INTO venues (name, city) OUTPUT INSERTED.id VALUES (@VenueName, @VenueCity)", conn);
+      SqlCommand cmd = new SqlCommand("INSERT INTO venues (name, city, photo) OUTPUT INSERTED.id VALUES (@VenueName, @VenueCity, @VenuePhoto)", conn);
 
       SqlParameter venueNameParam = new SqlParameter();
       venueNameParam.ParameterName = "@VenueName";
@@ -88,9 +95,14 @@ namespace BandTracker
       venueCityParam.ParameterName = "@VenueCity";
       venueCityParam.Value = this.GetCity();
 
+      SqlParameter venuePhotoParam = new SqlParameter();
+      venuePhotoParam.ParameterName = "@VenuePhoto";
+      venuePhotoParam.Value = this.GetPhoto();
+
 
       cmd.Parameters.Add(venueNameParam);
       cmd.Parameters.Add(venueCityParam);
+      cmd.Parameters.Add(venuePhotoParam);
 
       SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -132,14 +144,16 @@ namespace BandTracker
       int foundVenueId = 0;
       string foundVenueName = null;
       string foundVenueCity = null;
+      string foundVenuePhoto = null;
 
       while(rdr.Read())
       {
         foundVenueId = rdr.GetInt32(0);
         foundVenueName = rdr.GetString(1);
         foundVenueCity = rdr.GetString(2);
+        foundVenuePhoto = rdr.GetString(3);
       }
-      Venue foundVenue = new Venue(foundVenueName, foundVenueCity, foundVenueId);
+      Venue foundVenue = new Venue(foundVenueName, foundVenueCity, foundVenuePhoto, foundVenueId);
 
       if (rdr != null)
       {
