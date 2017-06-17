@@ -4,6 +4,10 @@
 
 <h2> @Model["venue"].GetName(), @Model["venue"].GetCity()</h2>
 <img src="@Model["venue"].GetPhoto()" alt="photo of @Model["venue"].GetName()" width="500">
+<br>
+<a href="/venues/edit/@Model["venue"].GetId()">Change this photo</a>
+<br>
+<a href="/venues/delete/@Model["venue"].GetId()">Delete this venue</a>
 <hr />
 @if (@Model["venueBand"].Count != 0)
 {

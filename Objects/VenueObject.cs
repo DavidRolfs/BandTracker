@@ -225,17 +225,17 @@ namespace BandTracker
       }
       return bands;
     }
-    public void UpdateVenueName(string newName)
+    public void UpdateVenuePhoto(string newName)
 		{
 			SqlConnection conn = DB.Connection();
 			conn.Open();
 
-			SqlCommand cmd = new SqlCommand("UPDATE venues SET name = @NewName OUTPUT INSERTED.name WHERE id = @venueId;", conn);
+			SqlCommand cmd = new SqlCommand("UPDATE venues SET photo = @NewPhoto OUTPUT INSERTED.name WHERE id = @venueId;", conn);
 
-			SqlParameter newNameParameter = new SqlParameter();
-			newNameParameter.ParameterName = "@NewName";
-			newNameParameter.Value = newName;
-			cmd.Parameters.Add(newNameParameter);
+			SqlParameter newPhotoParameter = new SqlParameter();
+			newPhotoParameter.ParameterName = "@NewPhoto";
+			newPhotoParameter.Value = newName;
+			cmd.Parameters.Add(newPhotoParameter);
 
 			SqlParameter venueIdParameter = new SqlParameter();
 			venueIdParameter.ParameterName = "@venueId";

@@ -133,13 +133,13 @@ namespace BandTracker
       Assert.Equal(test, result);
     }
     [Fact]
-    public void Test_Update_UpdatesVenuesNameInDatabase()
+    public void Test_Update_UpdatesVenuesPhotoInDatabase()
     {
       Venue testVenue = new Venue("Crystal Ballroom", "Portland", "website.com/photoOfCrystalBallroom.jpg");
       testVenue.Save();
-      string newName = "Paul";
+      string newName = "website.com/diffphoto";
 
-      testVenue.UpdateVenueName(newName);
+      testVenue.UpdateVenuePhoto(newName);
 
       string result = testVenue.GetName();
 

@@ -84,7 +84,7 @@ namespace BandTracker
 
      Patch["venues/edit/{id}"] = parameter => {
        Venue SelectedVenue = Venue.Find(parameter.id);
-       SelectedVenue.UpdateVenueName(Request.Form["edit-venueName"]);
+       SelectedVenue.UpdateVenuePhoto(Request.Form["edit-venuePhoto"]);
        List<Venue> allVenues = Venue.GetAll();
        return View["venues.cshtml", allVenues];
      };
