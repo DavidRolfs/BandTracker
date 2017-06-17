@@ -16,6 +16,7 @@ Band Tracker allows the user to view bands and venues by adding them to the data
 * Once downloaded enter dnu restore into the terminal.
 * Now open SMSS
 * Select File > Open > File and select band_tracker.sql
+* Paste "CREATE DATABASE band_tracker; GO" at top of file (without the quotes)
 * Save the file and click "Execute"
 * After all files have been downloaded and restored enter dnx kestrel into the terminal to run the server.
 * Open web browser of your choice and go to http://localhost:5004/ to view root page.
